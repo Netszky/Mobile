@@ -114,8 +114,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                                 fields.getGeo_point_2d()[1]
                                                         )
                                                 )
-                                                .title(fields.getAdresse())
-                                                .snippet(fields.getTarifhor())
+                                                .title("Adresse : " + fields.getAdresse() + fields.getArrondt() + " eme" )
+                                                .snippet("Tarif Horaire : "+ fields.getTarifhor() + "€")
                                 );
                                 markers.put(marker.getId(), fields); // pour associer l'identifiant d'un Market aux données (de l'objet Fields)
 

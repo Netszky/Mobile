@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         chrono.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(myIntent);
                 finish();
             }

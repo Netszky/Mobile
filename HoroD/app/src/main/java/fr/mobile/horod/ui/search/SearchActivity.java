@@ -70,7 +70,7 @@ public class SearchActivity extends AppCompatActivity {
             return;
         }
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = String.format(Constant.URL, "&refine.arrondt=",arrondissementEditText.getText().toString());
+        String url = String.format(Constant.URL + "&refine.arrondt=" + arrondissementEditText.getText().toString());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

@@ -76,6 +76,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.e("volley", response);
+                Horodateur.clear();
                 parseJson(response);
             }
         }, new Response.ErrorListener() {
@@ -83,6 +84,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("volley", error.toString());
                 String json = new String(error.networkResponse.data);
+
                 parseJson(json);
             }
         });

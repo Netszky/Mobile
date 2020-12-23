@@ -8,6 +8,7 @@ import android.view.View;
 
 import fr.mobile.horod.R;
 import fr.mobile.horod.ui.maps.MapsActivity;
+import fr.mobile.horod.ui.search.SearchActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -20,5 +21,10 @@ public class HomeActivity extends AppCompatActivity {
     public void MapActivity(View view) {
         Intent intentmap = new Intent(HomeActivity.this, MapsActivity.class);
         startActivity(intentmap);
+    }
+
+    public void SearchActivity(View view) {
+        Intent intentSearch = new Intent(HomeActivity.this, SearchActivity.class);
+        startActivity(intentSearch);
     }
 }

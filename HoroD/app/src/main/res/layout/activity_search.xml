@@ -32,6 +32,7 @@
         android:background="@color/black">
 
         <EditText
+            android:hint="Renseignez un arrondissement"
             android:id="@+id/arrondissementEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,12 +41,43 @@
 
             android:layout_margin="20dp"
             android:background="@color/white"/>
+
         <Button
             android:onClick="submit"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:text="Rechercher"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre d'heures"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/white"/>
+        <EditText
+            android:id="@+id/editTextHeure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:layout_margin="15dp"
+            android:padding="15dp"/>
+        <Button
+            android:onClick="Calcul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Calculer"/>
+        <TextView
+            android:id="@+id/textViewPrix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:padding="15dp"
+            android:background="#bde9c9"
+            android:textSize="20dp"
+            />
         <ListView
             android:id="@+id/ListHoro"
             android:layout_width="match_parent"

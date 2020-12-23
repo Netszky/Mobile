@@ -3,16 +3,16 @@ package fr.mobile.horod.models;
 import java.io.Serializable;
 
 public class Fields implements Serializable {
-    private String tarifhor;
+    private double tarifhor;
     private String adresse;
     private double[] geo_point_2d;
     private String arrondt;
 
-    public String getTarifhor() {
+    public double getTarifhor() {
         return tarifhor;
     }
 
-    public void setTarifhor(String tarifhor) {
+    public void setTarifhor(double tarifhor) {
         this.tarifhor = tarifhor;
     }
 

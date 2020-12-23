@@ -2,7 +2,6 @@ package fr.mobile.horod.ui.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,7 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -27,9 +26,6 @@ import fr.mobile.horod.R;
 import fr.mobile.horod.models.ApiHoro;
 import fr.mobile.horod.models.Fields;
 import fr.mobile.horod.models.Records;
-import fr.mobile.horod.ui.calcul.CalculActivity;
-import fr.mobile.horod.ui.home.HomeActivity;
-import fr.mobile.horod.ui.maps.MapsActivity;
 import fr.mobile.horod.util.Constant;
 import fr.mobile.horod.util.FastDialog;
 import fr.mobile.horod.util.Network;
@@ -37,6 +33,10 @@ import fr.mobile.horod.util.Network;
 public class SearchActivity extends AppCompatActivity {
     private EditText arrondissementEditText;
     private ListView ListHoro;
+    private TextView textViewPrix;
+    private EditText editTextHeure;
+
+
     private List<Records> records;
     private List<String> Horodateur = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
@@ -50,14 +50,15 @@ public class SearchActivity extends AppCompatActivity {
         );
         setContentView(R.layout.activity_search);
 
-
+        textViewPrix = (TextView) findViewById(R.id.textViewPrix);
+        editTextHeure = (EditText) findViewById(R.id.editTextHeure);
         arrondissementEditText = (EditText) findViewById(R.id.arrondissementEditText);
         ListHoro = (ListView) findViewById(R.id.ListHoro);
         ListHoro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intentHoro = new Intent(SearchActivity.this, CalculActivity.class);
-                startActivity(intentHoro);
+                String tarif = String.valueOf(records.get(position).getFields().getTarifhor());
+                textViewPrix.setText(String.format(tarif));
             }
         });
 
@@ -103,10 +104,26 @@ public class SearchActivity extends AppCompatActivity {
         if (records != null && records.size() > 0) {
             for (int i = 0; i < records.size(); i++) {
                 Fields fields = records.get(i).getFields();
-                Horodateur.add(String.format(fields.getAdresse() + " Tarif: " +fields.getTarifhor() + "€"));
+                Horodateur.add(String.format(fields.getAdresse() + " Tarif : " + fields.getTarifhor() + " €"));
                 adapter.notifyDataSetChanged();
             }
             ListHoro.setAdapter(adapter);
+        }
+    }
+
+    public void Calcul(View view) {
+        if (editTextHeure != null){
+            String heuretext = String.valueOf(editTextHeure.getText());
+            int heure = Integer.parseInt(heuretext);
+            double prix = Double.parseDouble(String.valueOf(textViewPrix.getText()));
+            double tarif = prix * heure;
+            textViewPrix.setText(String.format("Prix a payer " +  tarif + " €"));
+        }
+        else {
+
+            FastDialog.showDialog(SearchActivity.this,
+                    FastDialog.SIMPLE_DIALOG,
+                    "Renseignez une heure");
         }
     }
 }

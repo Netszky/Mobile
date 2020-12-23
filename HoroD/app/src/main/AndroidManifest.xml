@@ -17,7 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HoroD">
-        <activity android:name=".ui.calcul.CalculActivity"></activity>
         <activity android:name=".ui.search.SearchActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

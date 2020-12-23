@@ -2,6 +2,7 @@ package fr.mobile.horod.ui.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -25,6 +27,9 @@ import fr.mobile.horod.R;
 import fr.mobile.horod.models.ApiHoro;
 import fr.mobile.horod.models.Fields;
 import fr.mobile.horod.models.Records;
+import fr.mobile.horod.ui.calcul.CalculActivity;
+import fr.mobile.horod.ui.home.HomeActivity;
+import fr.mobile.horod.ui.maps.MapsActivity;
 import fr.mobile.horod.util.Constant;
 import fr.mobile.horod.util.FastDialog;
 import fr.mobile.horod.util.Network;
@@ -51,7 +56,8 @@ public class SearchActivity extends AppCompatActivity {
         ListHoro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intentHoro = new Intent(SearchActivity.this, CalculActivity.class);
+                startActivity(intentHoro);
             }
         });
 

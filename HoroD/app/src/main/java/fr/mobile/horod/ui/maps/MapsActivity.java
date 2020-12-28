@@ -60,6 +60,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMinZoomPreference(10.0f);
+        mMap.setMaxZoomPreference(20.0f);
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -104,7 +106,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             for (int i = 0; i < records.size(); i++) {
                                 Fields fields = records.get(i).getFields();
-
                                 // addMarker
                                 Marker marker = mMap.addMarker(
                                         new MarkerOptions()
@@ -128,6 +129,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             )
                                     ));
                                 }
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(
+                                        new LatLng(
+                                                fields.getGeo_point_2d()[0],
+                                                fields.getGeo_point_2d()[1]
+                                        )
+                                ));
                             }
                         }
                     }

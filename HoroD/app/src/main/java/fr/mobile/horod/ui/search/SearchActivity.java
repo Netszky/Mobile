@@ -137,7 +137,7 @@ public class SearchActivity extends AppCompatActivity {
                     NotificationHelper notificationHelper = new NotificationHelper(SearchActivity.this);
                     notificationHelper.notify(1, false, "Horodateur", "Votre stationnement prend fin" );
                 }
-            }, 2000);
+            }, Convert(heure) - (900000));
             FastDialog.showDialog(SearchActivity.this,
                     FastDialog.SIMPLE_DIALOG,
                     "Notifications O K ");

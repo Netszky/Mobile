@@ -63,6 +63,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(20.0f);
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                return false;
+            }
+        });
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -74,7 +81,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         getData(mMap);
     }
-
     private void getData(GoogleMap mMap) {
 
         if (!Network.isNetworkAvailable(MapsActivity.this)) {

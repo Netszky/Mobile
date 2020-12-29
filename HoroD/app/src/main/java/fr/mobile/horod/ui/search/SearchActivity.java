@@ -38,6 +38,7 @@ import fr.mobile.horod.models.Records;
 import fr.mobile.horod.util.Constant;
 import fr.mobile.horod.util.FastDialog;
 import fr.mobile.horod.util.Network;
+import fr.mobile.horod.util.NotificationHelper;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText arrondissementEditText;
@@ -133,9 +134,10 @@ public class SearchActivity extends AppCompatActivity {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Notify();
+                    NotificationHelper notificationHelper = new NotificationHelper(SearchActivity.this);
+                    notificationHelper.notify(1, false, "Horodateur", "Votre stationnement prend fin" );
                 }
-            }, Convert(heure));
+            }, 2000);
             FastDialog.showDialog(SearchActivity.this,
                     FastDialog.SIMPLE_DIALOG,
                     "Notifications O K ");
@@ -146,27 +148,6 @@ public class SearchActivity extends AppCompatActivity {
                     "Renseignez une heure");
             return;
         }
-    }
-
-    public void Notify(){
-        Context context = SearchActivity.this;
-        Resources res = context.getResources();
-        Notification notification = new Notification.Builder(context)
-                .setSmallIcon(R.drawable.splashlogo)     // drawable for API 26
-                .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.splashlogo))
-                .setWhen(System.currentTimeMillis())
-                .setAutoCancel(true)
-                .setContentTitle("Votre Stationnement arrive à expiration")
-                .setContentText( "Il vous reste 15 minutes de stationnement"  )
-                .setVibrate(new long[] { 0, 500, 110, 500, 110, 450, 110, 200, 110,
-                        170, 40, 450, 110, 200, 110, 170, 40, 500 } )
-                .setLights(Color.RED, 3000, 3000)
-                .build();
-
-
-        NotificationManager notifManager = (NotificationManager)
-                context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notifManager.notify( NOTIF_ID, notification );
     }
     public long Convert(Integer time){
         long timeConvert;

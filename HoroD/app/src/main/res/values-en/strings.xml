@@ -5,4 +5,5 @@
     <string name="search">Search</string>
     <string name="Heure">How Many Hours ?</string>
     <string name="calculer">Calculate</string>
+    <string name="dialog_network_error">You must be connected</string>
 </resources>

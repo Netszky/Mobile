@@ -10,80 +10,84 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2E2B2B"
+        android:background="#F44336"
         android:orientation="horizontal"
-        android:padding="25dp" >
+        android:padding="25dp">
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/rechercher_un_horodateur"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textSize="30dp"
-            android:textAlignment="center"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/black">
+        android:background="#CD000000"
+        android:orientation="vertical">
 
         <EditText
-            android:hint="Renseignez un arrondissement"
             android:id="@+id/arrondissementEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:layout_gravity="center_vertical"
-
             android:layout_margin="20dp"
-            android:background="@color/white"/>
+            android:background="@color/white"
+
+            android:hint="Renseignez un arrondissement"
+            android:padding="15dp" />
 
         <Button
-            android:onClick="submit"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/search"
-            android:layout_height="wrap_content"/>
+            android:onClick="submit"
+            android:text="@string/search" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Heure"
-            android:textStyle="bold"
+            android:textSize="20dp"
             android:textAlignment="center"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/editTextHeure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="@color/white"
             android:layout_margin="15dp"
-            android:padding="15dp"/>
+            android:background="@color/white"
+            android:padding="15dp" />
+
         <Button
-            android:onClick="Calcul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/calculer"/>
+            android:onClick="Calcul"
+            android:text="@string/calculer" />
+
         <TextView
             android:id="@+id/textViewPrix"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:background="#ffffff"
             android:padding="15dp"
-            android:background="#bde9c9"
-            android:textSize="20dp"
-            />
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
         <ListView
             android:id="@+id/ListHoro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            />
+            android:background="@color/white" />
 
     </LinearLayout>
 

@@ -49,7 +49,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private List<Records> records;
     private List<String> Horodateur = new ArrayList<String>();
-    private static final int NOTIF_ID = 123;
     private ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,14 +127,14 @@ public class SearchActivity extends AppCompatActivity {
             int heure = Integer.parseInt(heuretext);
             double prix = Double.parseDouble(String.valueOf(textViewPrix.getText()));
             double tarif = prix * heure;
-            textViewPrix.setText(String.format("Prix a payer " +  tarif + " €"));
+            textViewPrix.setText(String.format(getString(R.string.price) +  tarif + " €"));
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     NotificationHelper notificationHelper = new NotificationHelper(SearchActivity.this);
-                    notificationHelper.notify(1, false, "Horodateur", "Votre stationnement prend fin" );
+                    notificationHelper.notify(1, false, "Horodateur", "Votre stationnement prend fin dans 15 minutes" );
                 }
             }, Convert(heure) - (900000));
             FastDialog.showDialog(SearchActivity.this,

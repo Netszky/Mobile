@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="price">\"Price : \"</string>
+    <string name="rechercher_un_horodateur">Parking Meter</string>
+    <string name="search">Search</string>
+    <string name="Heure">How Many Hours ?</string>
+    <string name="calculer">Calculate</string>
+</resources>

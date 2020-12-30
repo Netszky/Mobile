@@ -6,4 +6,8 @@
 
     <string name="dialog_network_error">Vous devez être connecté</string>
     <string name="rechercher_un_horodateur">Rechercher un Horodateur</string>
+    <string name="price">\"Prix a payer \"</string>
+    <string name="search">Rechercher</string>
+    <string name="Heure">Nombre d\'heures</string>
+    <string name="calculer">Calculer</string>
 </resources>

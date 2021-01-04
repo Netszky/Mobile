@@ -60,6 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         if(getIntent().getExtras() != null){
              tarif2 = getIntent().getExtras().getString("tarif");
              adresse = getIntent().getExtras().getString("adresse");
+             adressenot = adresse;
         }
 
         adapter = new ArrayAdapter<String>(
@@ -156,7 +157,7 @@ public class SearchActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     NotificationHelper notificationHelper = new NotificationHelper(SearchActivity.this);
-                    notificationHelper.notify(1, false, adressenot, "Votre stationnement à l'adresse prend fin dans 15 minutes" );
+                    notificationHelper.notify(1, false, adressenot, "Votre stationnement prend fin dans 15 minutes" );
                 }
             }, 1000);
             FastDialog.showDialog(SearchActivity.this,

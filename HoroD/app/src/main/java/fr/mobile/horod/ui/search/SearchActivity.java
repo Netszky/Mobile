@@ -45,6 +45,10 @@ public class SearchActivity extends AppCompatActivity {
     private ListView ListHoro;
     private TextView textViewPrix;
     private EditText editTextHeure;
+    private String url;
+    private String tarif2;
+    private String adressenot;
+    private String adresse;
 
 
     private List<Records> records;
@@ -53,22 +57,32 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getIntent().getExtras() != null){
+             tarif2 = getIntent().getExtras().getString("tarif");
+             adresse = getIntent().getExtras().getString("adresse");
+        }
+
         adapter = new ArrayAdapter<String>(
                 SearchActivity.this,
                 android.R.layout.simple_list_item_1,
                 Horodateur
         );
+
+
         setContentView(R.layout.activity_search);
 
         textViewPrix = (TextView) findViewById(R.id.textViewPrix);
+        textViewPrix.setText(tarif2);
         editTextHeure = (EditText) findViewById(R.id.editTextHeure);
         arrondissementEditText = (EditText) findViewById(R.id.arrondissementEditText);
+        arrondissementEditText.setText(adresse);
         ListHoro = (ListView) findViewById(R.id.ListHoro);
         ListHoro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String tarif = String.valueOf(records.get(position).getFields().getTarifhor());
-                textViewPrix.setText(String.format(tarif));
+               String tarif = String.valueOf(records.get(position).getFields().getTarifhor());
+               adressenot = String.valueOf(records.get(position).getFields().getAdresse());
+               textViewPrix.setText(String.format(tarif));
             }
         });
 
@@ -80,6 +94,12 @@ public class SearchActivity extends AppCompatActivity {
                     "Renseignez un arrondissement");
             return;
         }
+        if (textViewPrix == null){
+            FastDialog.showDialog(SearchActivity.this,
+                    FastDialog.SIMPLE_DIALOG,
+                    "Choisissez un Horodateur");
+            return;
+        }
         if(!Network.isNetworkAvailable(SearchActivity.this)){
             FastDialog.showDialog(SearchActivity.this,
                     FastDialog.SIMPLE_DIALOG,
@@ -87,7 +107,9 @@ public class SearchActivity extends AppCompatActivity {
             return;
         }
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = String.format(Constant.URL + "&refine.arrondt=" + arrondissementEditText.getText().toString());
+        url = String.format(Constant.URL + "&refine.arrondt=" + arrondissementEditText.getText().toString());
+
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -134,9 +156,9 @@ public class SearchActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     NotificationHelper notificationHelper = new NotificationHelper(SearchActivity.this);
-                    notificationHelper.notify(1, false, "Horodateur", "Votre stationnement prend fin dans 15 minutes" );
+                    notificationHelper.notify(1, false, adressenot, "Votre stationnement à l'adresse prend fin dans 15 minutes" );
                 }
-            }, Convert(heure) - (900000));
+            }, 1000);
             FastDialog.showDialog(SearchActivity.this,
                     FastDialog.SIMPLE_DIALOG,
                     "Notifications O K ");

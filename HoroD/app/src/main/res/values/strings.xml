@@ -10,4 +10,5 @@
     <string name="search">Rechercher</string>
     <string name="Heure">Nombre d\'heures</string>
     <string name="calculer">Calculer</string>
+    <string name="erreurrecherche">Recherche Invalide</string>
 </resources>

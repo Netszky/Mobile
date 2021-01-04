@@ -2,6 +2,7 @@ package fr.mobile.horod.ui.maps;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import fr.mobile.horod.R;
 import fr.mobile.horod.models.ApiHoro;
 import fr.mobile.horod.models.Fields;
 import fr.mobile.horod.models.Records;
+import fr.mobile.horod.ui.search.SearchActivity;
 import fr.mobile.horod.util.Constant;
 import fr.mobile.horod.util.FastDialog;
 import fr.mobile.horod.util.Network;
@@ -74,8 +76,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Fields fields = markers.get(marker.getId());
-
-                Toast.makeText(MapsActivity.this, "ID: "+marker.getId()+" - "+fields.getAdresse(), Toast.LENGTH_SHORT).show();
+                Intent map = new Intent(MapsActivity.this, SearchActivity.class);
+                String test = String.valueOf(fields.getTarifhor());
+                String adresse = String.valueOf(fields.getAdresse());
+                map.putExtra("tarif", test);
+                map.putExtra("adresse", adresse);
+                startActivity(map);
             }
         });
 

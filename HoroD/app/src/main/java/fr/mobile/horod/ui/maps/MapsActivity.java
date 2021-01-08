@@ -62,6 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //Réglages de la map au lancement
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(20.0f);
 
@@ -74,6 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
+            //Lorsque l'utilisateur clique sur les infos d'un horodateur le renvoi vers l'activité de calcul avec les informations de celui-ci
             public void onInfoWindowClick(Marker marker) {
                 Fields fields = markers.get(marker.getId());
                 Intent map = new Intent(MapsActivity.this, SearchActivity.class);
@@ -99,7 +101,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         // requête HTTP avec Volley
-        // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Constant.URL;
 

@@ -57,6 +57,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Récupérer les informations après clique sur un marker googlemap
         if(getIntent().getExtras() != null){
              tarif2 = getIntent().getExtras().getString("tarif");
              adresse = getIntent().getExtras().getString("adresse");
@@ -80,21 +81,23 @@ public class SearchActivity extends AppCompatActivity {
         ListHoro = (ListView) findViewById(R.id.ListHoro);
         ListHoro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+            //Récupérer les informations d'un horodateur dans la Liste
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                String tarif = String.valueOf(records.get(position).getFields().getTarifhor());
                adressenot = String.valueOf(records.get(position).getFields().getAdresse());
                textViewPrix.setText(String.format(tarif));
             }
         });
-
     }
     public void submit(View view) {
+        //Verifier que le champs arrondissement soit bien rempli
         if (arrondissementEditText.getText().toString().isEmpty()){
             FastDialog.showDialog(SearchActivity.this,
                     FastDialog.SIMPLE_DIALOG,
                     "Renseignez un arrondissement");
             return;
         }
+        //Verifiez que l'utilisateur a bien choisi un horodateur
         if (textViewPrix == null){
             FastDialog.showDialog(SearchActivity.this,
                     FastDialog.SIMPLE_DIALOG,
@@ -107,6 +110,7 @@ public class SearchActivity extends AppCompatActivity {
                     "Activez les données mobiles");
             return;
         }
+        //Appel des Open data paris
         RequestQueue queue = Volley.newRequestQueue(this);
         url = String.format(Constant.URL + "&refine.arrondt=" + arrondissementEditText.getText().toString());
 
@@ -130,6 +134,7 @@ public class SearchActivity extends AppCompatActivity {
         });
         queue.add(stringRequest);
     }
+    //Traitement des données de l'api avec Gson
     private void parseJson(String response){
         ApiHoro api = new Gson().fromJson(response, ApiHoro.class);
         records = api.getRecords();
@@ -144,6 +149,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    //Calcul du prix d'un horodateur en fonction du tarif et du temlps
     public void Calcul(View view) {
         if (editTextHeure != null){
             String heuretext = String.valueOf(editTextHeure.getText());
@@ -151,7 +157,7 @@ public class SearchActivity extends AppCompatActivity {
             double prix = Double.parseDouble(String.valueOf(textViewPrix.getText()));
             double tarif = prix * heure;
             textViewPrix.setText(String.format(getString(R.string.price) +  tarif + " €"));
-
+            // Envoi d'une notification push 15 minutes avant la fin (heure - 90000) le délai est a 1000 pour la démo
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -171,6 +177,8 @@ public class SearchActivity extends AppCompatActivity {
             return;
         }
     }
+
+    //Convertir les heures en millisecondes
     public long Convert(Integer time){
         long timeConvert;
         timeConvert = time * 3600000;
